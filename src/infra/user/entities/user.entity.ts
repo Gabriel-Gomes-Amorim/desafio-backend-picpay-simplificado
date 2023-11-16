@@ -1,12 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('user')
 export class User {
-  @PrimaryGeneratedColumn()
-  id?: number;
+  @PrimaryGeneratedColumn('uuid')
+  id?: string;
 
   @Column()
-  name: string;
+  fullName: string;
+
+  @Column()
+  cpfCnpj: string;
 
   @Column()
   email: string;
@@ -14,6 +22,6 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
-  telephone: string;
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt?: Date;
 }

@@ -1,10 +1,11 @@
 import { Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 export default class UserRepository {
   constructor(
-    @Inject('USER_REPOSITORY')
+    @InjectRepository(User)
     private userRepostitory: Repository<User>,
   ) {}
 
@@ -16,7 +17,7 @@ export default class UserRepository {
     return this.userRepostitory.save(user);
   }
 
-  public async findById(id: number): Promise<User | null> {
+  public async findById(id: string): Promise<User | null> {
     const findUser = this.userRepostitory.findOne({
       where: {
         id,
@@ -29,6 +30,14 @@ export default class UserRepository {
     return this.userRepostitory.findOne({
       where: {
         email,
+      },
+    });
+  }
+
+  public async findByCpfCnpj(cpfCnpj: string): Promise<User | null> {
+    return this.userRepostitory.findOne({
+      where: {
+        cpfCnpj,
       },
     });
   }

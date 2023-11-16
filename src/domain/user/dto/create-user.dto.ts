@@ -11,7 +11,12 @@ export class CreateUserDto {
   @ApiProperty({ description: 'Nome do usuário' })
   @IsNotEmpty()
   @IsString()
-  name: string;
+  fullName: string;
+
+  @ApiProperty({ description: 'Cpf ou Cnpj' })
+  @IsNotEmpty()
+  @IsString()
+  cpfCnpj: string;
 
   @ApiProperty({ description: 'Endereço de email do usuário' })
   @IsNotEmpty()
@@ -22,9 +27,4 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(6)
   password: string;
-
-  @ApiProperty({ description: 'Número de telefone do usuário' })
-  @IsNotEmpty()
-  @IsPhoneNumber('BR')
-  telephone: string;
 }

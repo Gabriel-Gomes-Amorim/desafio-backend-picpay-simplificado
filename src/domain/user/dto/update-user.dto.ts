@@ -3,7 +3,10 @@ import { IsEmail, IsPhoneNumber, MinLength } from 'class-validator';
 
 export class UpdateUserDto {
   @ApiProperty({ description: 'Nome do usuário' })
-  name: string;
+  full_name: string;
+
+  @ApiProperty({ description: 'Cpf ou Cnpj' })
+  cpf_cnpj: string;
 
   @ApiProperty({ description: 'Endereço de email do usuário' })
   @IsEmail()
@@ -12,8 +15,4 @@ export class UpdateUserDto {
   @ApiProperty({ description: 'Senha do usuário' })
   @MinLength(6)
   password: string;
-
-  @ApiProperty({ description: 'Número de telefone do usuário' })
-  @IsPhoneNumber('BR')
-  telephone: string;
 }

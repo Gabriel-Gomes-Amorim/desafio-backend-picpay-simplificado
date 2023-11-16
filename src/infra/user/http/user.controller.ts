@@ -42,45 +42,4 @@ export class UserController {
         .json({ message: 'erro ao criar usuario!', error: error });
     }
   }
-
-  @Get(':id')
-  async findOne(
-    @Param('id') id: number,
-    @Res() res: Response,
-  ): Promise<Response> {
-    try {
-      const user = await this.userService.findById(id);
-
-      return res.status(HttpStatus.OK).json(user);
-    } catch (error) {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'erro ao buscar usuario!', error: error });
-    }
-  }
-
-  @Patch('update/:id')
-  async update(
-    @Param('id') id: number,
-    @Body() updateUserDto: UpdateUserDto,
-    @Res() res: Response,
-    @Req() req: Request,
-  ): Promise<Response> {
-    try {
-      const user = await this.userService.update(id, updateUserDto);
-
-      return res
-        .status(HttpStatus.OK)
-        .json({ message: 'Usuario atualizado com sucesso!', user });
-    } catch (error) {
-      return res
-        .status(HttpStatus.BAD_REQUEST)
-        .json({ message: 'erro ao atualizar o usuario!', error: error });
-    }
-  }
-
-  @Delete('delete/:id')
-  remove(@Param('id') id: number): Promise<void> {
-    return this.userService.remove(+id);
-  }
 }
