@@ -30,6 +30,8 @@ export class UserService {
       cpfCnpj: createUserDto.cpfCnpj,
       email: createUserDto.email,
       password: await bcrypt.hash(createUserDto.password, 10),
+      type: createUserDto.type,
+      balance: createUserDto.balance,
     };
 
     const newUser = await this.userRepository.create(createUser);
