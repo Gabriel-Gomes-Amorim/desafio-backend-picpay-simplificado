@@ -58,6 +58,8 @@ export class TransactionService {
       newTransaction,
     );
 
+    await this.sendNotification();
+
     return {
       ...createdTransaction,
     };
@@ -70,6 +72,19 @@ export class TransactionService {
       );
 
       return response.data.message;
+    } catch (error) {
+      console.error('Erro ao verificar o Mocky:', error);
+      throw new Error('Erro ao verificar o Mocky');
+    }
+  }
+
+  async sendNotification() {
+    try {
+      const response = await axios.get(
+        'https://run.mocky.io/v3/54dc2cf1-3add-45b5-b5a9-6bf7e7f1f4a6',
+      );
+
+      console.log(response.data.message);
     } catch (error) {
       console.error('Erro ao verificar o Mocky:', error);
       throw new Error('Erro ao verificar o Mocky');
