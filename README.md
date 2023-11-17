@@ -55,6 +55,8 @@ docker-compose up -d
 
 6 Doc API - localhost:{porta que você subiu api}/api
 
+## Comandos para migrations
+
 Para gerar migrations: 
 ```bash
 npm run migration:generate -- src/infra/database/migrations/{nome da migration}
