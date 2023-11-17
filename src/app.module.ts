@@ -8,6 +8,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { UserModule } from './infra/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceOptions } from './infra/database/database.providers';
+import { TransactionModule } from './infra/transaction/transaction.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { dataSourceOptions } from './infra/database/database.providers';
     TypeOrmModule.forRoot(dataSourceOptions),
     UserModule,
     AuthModule,
+    TransactionModule,
   ],
   controllers: [AppController],
   providers: [

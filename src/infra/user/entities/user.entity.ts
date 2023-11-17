@@ -1,7 +1,9 @@
+import { Transaction } from 'src/infra/transaction/entities/transaction.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -30,4 +32,10 @@ export class User {
 
   @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt?: Date;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.payer)
+  transactionsPayer?: Transaction[];
+
+  @OneToMany(() => Transaction, (transaction) => transaction.payee)
+  transactionsPayee?: Transaction[];
 }

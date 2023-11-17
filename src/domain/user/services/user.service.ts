@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import UserRepository from 'src/infra/user/repository/user.repository';
-import { EmailException } from '../utils/EmailExists';
-import { CpfCnpjException } from '../utils/CpfCnpjExits';
-
+import { EmailException } from '../../utils/errors/EmailExists';
+import { CpfCnpjException } from '../../utils/errors/CpfCnpjExits';
+import { User } from 'src/infra/user/entities/user.entity';
 @Injectable()
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const { email, cpfCnpj } = createUserDto;
 
     const isEmailAlreadyExists = await this.userRepository.findByEmail(email);
