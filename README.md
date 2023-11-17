@@ -1,5 +1,3 @@
-## Desafio pic-pay-simplificado
-
 ## Objetivo: PicPay Simplificado
 
 Temos 2 tipos de usuários, os comuns e lojistas, ambos têm carteira com dinheiro e realizam transferências entre eles. Vamos nos atentar somente ao fluxo de transferência entre dois usuários.
@@ -43,13 +41,32 @@ Este serviço deve ser RESTFul.
 npm install
 ```
 
-3 - subir os containers
+3 - executar as migrations
+
+```bash
+npm run migration:run
+```
+
+4 - subir os containers
 
 ```bash
 docker-compose up -d
 ```
 
-5 Doc API - localhost:{porta que você subiu api}/api
+6 Doc API - localhost:{porta que você subiu api}/api
+
+Para gerar migrations: 
+```bash
+npm run migration:generate -- src/infra/database/migrations/{nome da migration}
+```
+Para executar migrations: 
+```bash
+npm run migration:run
+```
+Para reverter migrations: 
+```bash
+npm run migration:revert
+```
 
 ## Contato
 
